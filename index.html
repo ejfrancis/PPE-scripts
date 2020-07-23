@@ -1,16 +1,238 @@
 <html>
   <body>
-    <h1>PPE scripts</h1>
-    <p>Enter the spreadsheet URLs, each on a new line. (ex:  for the sheet
-    "https://docs.google.com/spreadsheets/d/1St0iBz_GNHutf2eWfCQaGKK3AE6gi5JusI41MxKoTZ4/edit#gid=1565047463"
-    the URL is the part between "/d/" and "/edit", so the spreedsheet URL is "1St0iBz_GNHutf2eWfCQaGKK3AE6gi5JusI41MxKoTZ4".
+    <h1>PPE Data</h1>
+
+    <h2>Adding a new source sheet</h2>
+    <h3>First, create new sheet</h3>
+    <ol>
+      <li>
+        The Sheet template is here, make a copy of it for the new source sheet. You will probably want to remove the example placeholder rows.
+
+        <a href='https://docs.google.com/spreadsheets/d/1aA9LQq0Hs-X2m_csOzQMD02vD3zkNtARKmoTA70vfkY/edit#gid=1565047463'>
+          https://docs.google.com/spreadsheets/d/1aA9LQq0Hs-X2m_csOzQMD02vD3zkNtARKmoTA70vfkY/edit#gid=1565047463
+        </a>
+      </li>
+      <li>
+        Make sure the new sheet is added to the Sheets Directory here: <a href='https://docs.google.com/spreadsheets/d/1d7yhUJi8sfrm19Q39mU5SUwPbw57L5WaZvd_1NO_ZW8/edit#gid=0'>
+          https://docs.google.com/spreadsheets/d/1d7yhUJi8sfrm19Q39mU5SUwPbw57L5WaZvd_1NO_ZW8/edit#gid=0
+        </a>
+      </li>
+    </ol>
+    <br />
+
+    <h3>Next, update the Master sheet</h3>
+    <p>With that done, enter all of the spreadsheet URLs below, each on a new line. The easiest way to do this
+    is to simply select every cell in the "URL" column in the Sheets Directroy mentied above and hit "Copy" (ctrl + c).
+    <p>What you enter will look something lik this:</p>
+    <pre style='border: 1px solid black'>
+1St0iBz_GNHutf2eWfCQaGKK3AE6gi5JusI41MxKoTZ4
+1Flq1kb1HGR3WwnpvQx46eyRdvHivm8IIrGcxX2MmNpE
+1APetMcXOq4eo9ali-fVWmcMmM9NWJM8xoF-uHxfBYbE</pre>
+    <br />
+    (ex:  for the sheet "<em>https://docs.google.com/spreadsheets/d/1St0iBz_GNHutf2eWfCQaGKK3AE6gi5JusI41MxKoTZ4/edit#gid=1565047463</em>"
+    the URL is the part between "/d/" and "/edit", so the spreedsheet URL is "<em>1St0iBz_GNHutf2eWfCQaGKK3AE6gi5JusI41MxKoTZ4</em>".
+    </p>
+      
+    <br />
+    <textarea style='width: 600px; height: 500px;' id="urls" >
+1St0iBz_GNHutf2eWfCQaGKK3AE6gi5JusI41MxKoTZ4
+1Flq1kb1HGR3WwnpvQx46eyRdvHivm8IIrGcxX2MmNpE
+1APetMcXOq4eo9ali-fVWmcMmM9NWJM8xoF-uHxfBYbE
+1k6GQLOWC3-tMsU91p1IZNUUNJfftqRPvCl5EaJX4STI
+1PPAwOszdbUg_HxAo8mnHcN-ueFeaY76SPeB-9adOQoA
+1grU-8Xs-KU22aljTazsfocvnAc_H7hREVhq2RvL5lmY
+1wFp5mpNAjba6xoDSIZiZQtJhRZnx5qotuxobLhH8eVE
+1xvI0j9H2YRvvgzp1B7HpvVcCPAZYhVIrsS8t4mFISF8
+1j2C6KB8i1qCL0fXLpcytkyC1yG8ESXqVOnrh-EkQRzc
+11zv4cBUCWzLmuHI83UJJ0nKcUXfoX95KreZBYWOX40U
+1Cvi5cTbqTDMjjWXL-CLeuUaiKCUzsSmB8MMjz1JpAXE</textarea>
+    <br />
+    <button onclick='test()'>Help me out</button>
+    <pre id="output">
+    </pre>
   </body>
   
-  <button onclick='test()'>Test</button>
   
   <script>
     function test() {
-      alert('hi');
+      // alert(JSON.stringify(document.getElementById('urls').value.split(/\r?\n/)));
+      // const spreadsheetUrls = [
+      //   '1St0iBz_GNHutf2eWfCQaGKK3AE6gi5JusI41MxKoTZ4',
+      //   '1Flq1kb1HGR3WwnpvQx46eyRdvHivm8IIrGcxX2MmNpE',
+      //   '1APetMcXOq4eo9ali-fVWmcMmM9NWJM8xoF-uHxfBYbE',
+      //   '1k6GQLOWC3-tMsU91p1IZNUUNJfftqRPvCl5EaJX4STI',
+      //   '1PPAwOszdbUg_HxAo8mnHcN-ueFeaY76SPeB-9adOQoA',
+      //   '1grU-8Xs-KU22aljTazsfocvnAc_H7hREVhq2RvL5lmY',
+      //   '1wFp5mpNAjba6xoDSIZiZQtJhRZnx5qotuxobLhH8eVE',
+      //   '1xvI0j9H2YRvvgzp1B7HpvVcCPAZYhVIrsS8t4mFISF8',
+      //   '1j2C6KB8i1qCL0fXLpcytkyC1yG8ESXqVOnrh-EkQRzc',
+      //   '11zv4cBUCWzLmuHI83UJJ0nKcUXfoX95KreZBYWOX40U',
+      //   '1Cvi5cTbqTDMjjWXL-CLeuUaiKCUzsSmB8MMjz1JpAXE'
+      // ];
+      const spreadsheetUrls = document.getElementById('urls').value.split(/\r?\n/).map(url => url.trim())
+      let output = '';
+
+      /**
+      * Get the OTGsellers sheet import function
+      */
+      const OTGsellers = () => {
+        const getRange = () => {
+          let rangeStr = '{';
+          spreadsheetUrls.forEach((url, i) => {
+            rangeStr += `
+    iferror(filter(
+      importrange("${url}","OTGsellers!A3:K"),
+      NOT(ISBLANK(importrange("${url}","OTGsellers!B3:B"))),` /* ignore rows w/o date */ + `
+      INDEX(importrange("${url}","OTGsellers!B3:B"))>TODAY() - 7 ` /* filter to last 7 days */ + `
+    ), 
+    {IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,)})`;
+            if (i < spreadsheetUrls.length - 1) {
+              rangeStr += ';';
+            }
+            rangeStr += '\r\n\r\n';
+
+          });
+          rangeStr += '}';
+          return rangeStr;
+        }
+
+        // 2 is sort by date
+        let finalStr = `
+=sort(${getRange()}, 2, false)
+        `;
+        return finalStr;
+      };
+      
+      /**
+      * Get the OTGbuyers sheet import function
+      */
+      const OTGbuyers = () => {
+        const getRange = () => {
+          let rangeStr = '{';
+          spreadsheetUrls.forEach((url, i) => {
+            rangeStr += `
+    iferror(filter(
+      importrange("${url}","OTGbuyers!A3:H"),
+      NOT(ISBLANK(importrange("${url}","OTGbuyers!D3:D")))` /* ignore rows w/o date */ + `
+    ),` /* if no data, return an empty row of blanks */ + `
+    {IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,)})`;
+            if (i < spreadsheetUrls.length - 1) {
+              rangeStr += ';';
+            }
+            rangeStr += '\r\n\r\n';
+
+          });
+          rangeStr += '}';
+          return rangeStr;
+        }
+
+        // 5 is sort by price
+        let finalStr = `
+=sort(${getRange()}, 5, false)
+        `;
+        return finalStr;
+      }
+
+      /**
+      * Get the ProductionSellers sheet import function
+      */
+      const ProductionSellers = () => {
+        const getRange = () => {
+          let rangeStr = '{';
+          spreadsheetUrls.forEach((url, i) => {
+            rangeStr += `
+    iferror(filter(
+      importrange("${url}","ProductionSellers!A3:L"),
+      NOT(ISBLANK(importrange("${url}","ProductionSellers!B3:B")))` /* ignore rows w/o date */ + `
+    ),` /* if no data, return an empty row of blanks */ + `
+    {IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,)})`;
+            if (i < spreadsheetUrls.length - 1) {
+              rangeStr += ';';
+            }
+            rangeStr += '\r\n\r\n';
+
+          });
+          rangeStr += '}';
+          return rangeStr;
+        }
+
+        // 7 means sort by price
+        let finalStr = `
+=sort(${getRange()}, 7, false)
+        `;
+        return finalStr;
+      };
+
+      /**
+      * Get the ProductionBuyers sheet import function
+      */
+      const ProductionBuyers = () => {
+        const getRange = () => {
+          let rangeStr = '{';
+          spreadsheetUrls.forEach((url, i) => {
+            rangeStr += `
+    iferror(filter(
+      importrange("${url}","ProductionBuyers!A3:K"),
+      NOT(ISBLANK(importrange("${url}","ProductionBuyers!B3:B")))` /* ignore rows w/o date */ + `
+    ),` /* if no data, return an empty row of blanks */ + `
+    {IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,)})`;
+            if (i < spreadsheetUrls.length - 1) {
+              rangeStr += ';';
+            }
+            rangeStr += '\r\n\r\n';
+
+          });
+          rangeStr += '}';
+          return rangeStr;
+        }
+
+        // 2 means sort by date
+        let finalStr = `
+=sort(${getRange()}, 2, false)
+        `;
+        return finalStr;
+      }
+
+     output += `
+                  It's time to add a new spreadsheet!
+
+      === STEP 1 - Go to the Master Menu Sheet ===
+      Go here: https://docs.google.com/spreadsheets/d/1PFUDs9h3twpBHZaM3cbkWDND-rJhB0P8Qvvm1-Ub-wo/edit#gid=1565047463
+
+      === STEP 2 - Connect the Master sheet to the new sheet ===
+      You'll need to connect the new spreadsheet. Do this by entering
+      this formula into any random cell, then click "Request access"
+      when it fails to load. This will connect the two sheets.
+
+      =importrange(<spreadsheet url>, "OTGsellers!A3:K")
+
+      === STEP 3 - Remove temporary cell used for connecting ===
+      After clicking "Request access" you can now clear out that cell
+      in the master sheet so it no longer contains the =importrange(...) formula.
+
+      === STEP 4 - Update OTGsellers script ===
+      Set cell A3 in the OTGsellers tab to this function:
+
+      ${OTGsellers()}
+
+      === STEP 5 - Update OTGbuyers script ===
+      Set cell A3 in the OTGbuyers tab to this function:
+
+      ${OTGbuyers()}
+
+      === STEP 6 - Update ProductionSellers script ===
+      Set cell A3 in the ProductionSellers tab to this function:
+
+      ${ProductionSellers()}
+
+      === STEP 7 - Update ProductionBuyers script ===
+      Set cell A3 in the ProductionBuyers tab to this function:
+
+      ${ProductionBuyers()}
+
+      `;
+
+      document.getElementById('output').innerText = output;
     }
   </script>
 </html>
