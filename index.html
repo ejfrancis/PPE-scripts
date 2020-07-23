@@ -83,7 +83,7 @@
     iferror(filter(
       importrange("${url}","OTGsellers!A3:K"),
       NOT(ISBLANK(importrange("${url}","OTGsellers!B3:B"))),` /* ignore rows w/o date */ + `
-      INDEX(importrange("${url}","OTGsellers!B3:B"))>TODAY() - 7 ` /* filter to last 7 days */ + `
+      INDEX(importrange("${url}","OTGsellers!B3:B"))>TODAY() - 8 ` /* filter to last 7 days */ + `
     ), 
     {IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,)})`;
             if (i < spreadsheetUrls.length - 1) {
