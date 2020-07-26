@@ -99,16 +99,33 @@
         <li>
           <h3>Connect the Master sheet to the new sheet, using a temporary cell</h3>
           <p>
-            You'll need to connect the Master sheet to the new spreadsheet. Do this by entering
-            this formula below into <em>any random unused cell</em> in the Master sheet, (say P2 in OTGsellers for example).
-            <br />
-            
-            <code id='new-sheet-url-in-importrange'><!-- to be replaced --></code>
-
-            <br />
-            <br />
-            Hit "enter" to save the formula into the cell, you'll then see a "REF" error, click the cell with the "REF" error
-            and you should see a buttont for "Request access". Click it. This will connect the two sheets.
+            You'll need to connect the Master sheet to the new spreadsheet. Do this by 
+            <ol>
+              <li>
+                Create a new temporary sheet/page in the Master sheet by clicking the "+" button in the bottom left.
+              </li>
+              <li>
+                Enter the following formula into any cell in the new sheet:
+                <br />
+                <code id='new-sheet-url-in-importrange'><!-- to be replaced --></code>
+              </li>
+              <li>
+                Hit "enter" to save the formula into the cell.
+              </li>
+              <li>
+                <ul>
+                  <li>
+                    If the data loads, you're good! 
+                  </li>
+                  <li>
+                    If the data <strong>doesn't load</strong> and shows a "REF" error instead, click the "REF" error and then click the "Request access" button that appears.
+                  <li>
+                </ul>
+              </li>
+              <li>
+                The master sheet is now connected to the new sheet. Delete this new temporary sheet.
+              </li>
+            </ol>
           </p>
         </li>
         <li>
