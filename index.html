@@ -1,51 +1,177 @@
 <html>
+  <head>
+    <style>
+      pre {
+        margin: 0;
+      }
+      input, textarea {
+        border: 2px solid blue;
+        padding: 5px;
+      }
+      code {
+        border: 1px solid gray;
+        padding: 5px;
+        margin: 5px 0;
+        display: inline-block;
+        max-height: 200px;
+        max-width: 800px;
+        overflow-y: scroll;
+        -webkit-user-select: all;  /* Chrome 49+ */
+        -moz-user-select: all;     /* Firefox 43+ */
+        -ms-user-select: all;      /* No support yet */
+        user-select: all;          /* Likely future */   
+      }
+    </style>
+  </head>
   <body>
-    <h1>PPE Data</h1>
+    <h1>PPE Data - Creating a new Buyers/Sellers sheet</h1>
 
-    <h2>Adding a new source sheet</h2>
-    <h3>First, create new sheet</h3>
+    <h2>First, create a new sheet</h2>
     <ol>
       <li>
-        The Sheet template is here, make a copy of it for the new source sheet. You will probably want to remove the example placeholder rows.
-
+        The 
         <a href='https://docs.google.com/spreadsheets/d/1aA9LQq0Hs-X2m_csOzQMD02vD3zkNtARKmoTA70vfkY/edit#gid=1565047463' target='_blank'>
-          https://docs.google.com/spreadsheets/d/1aA9LQq0Hs-X2m_csOzQMD02vD3zkNtARKmoTA70vfkY/edit#gid=1565047463
+          Sheet Template
         </a>
+        is here, make a copy of it for the new source sheet. You can make a copy by opening it and clicking "File > Make a Copy", make sure to put it in the correct folder in the Drive. You will probably want to remove the example placeholder data in the sheet as well.
+        <ul>
+          <li>Don't forget to move it to the correct folder, "PPE Menus  > Buyers/Sellers Brokers". By default copies of the template will be placed into "PPE Menu > Buyers/Sellers Template"</li>
+        </ul>
       </li>
       <li>
-        Make sure the new sheet is added to the Sheets Directory here: 
+        Make sure the new sheet is added to the 
+
         <a href='https://docs.google.com/spreadsheets/d/1d7yhUJi8sfrm19Q39mU5SUwPbw57L5WaZvd_1NO_ZW8/edit#gid=0' target='_blank'>
-          https://docs.google.com/spreadsheets/d/1d7yhUJi8sfrm19Q39mU5SUwPbw57L5WaZvd_1NO_ZW8/edit#gid=0
+          Sheets Directory
         </a>
+        <ul>
+          <li>NOTE: The "URL" is the portion of the full sheet's URL between "/d/" and "/edit". For example the link above to the Sheets Directory would have a "URL" of "1d7yhUJi8sfrm19Q39mU5SUwPbw57L5WaZvd_1NO_ZW8"</li>
+        </ul>
       </li>
     </ol>
-    <br />
 
-    <h3>Next, update the Master sheet</h3>
-    <p>With that done, enter all of the spreadsheet URLs below, each on a new line. The easiest way to do this
-    is to simply select every cell in the "URL" column in the Sheets Directroy mentioned above and hit "Copy" (ctrl + c).
-    <p>What you enter will look something lik this:</p>
-    <pre style='border: 1px solid black'>
+    <h2>Next, let's configure the formulas</h2>
+    <ol>
+      <li>
+        <h3>How many rows do you want to be shown in the OTGsellser table of the Master sheet?</h3>
+        <p>
+          This limits how many are visible:
+          <span><input type='number' id='number-of-otgsellers-rows' min='1' step='1' value='20'></span>
+        </p>
+      </li>
+      <li>
+        <h3>What is your new sheet's "URL"?</h3>
+        <p>
+          (Just the part between "/d/" and "/edit" of the full URL):
+          <span><input style='width: 450px;' type="text" id='new-sheet-url-input' placeholder="For example: 1pB8PLN4Ll97Pz77X_xLI-hPQrBu3MM5dyR2TlvatUh0" /></span>
+        </p>
+      </li>
+      <li>
+        <h3>Enter ALL of the spreadsheet URLs</h3>
+        <p>
+          Now enter <strong>all of the spreadsheet URLs</strong> from the Sheets directory in the text box below, each on a new line. Any sheet you wanted to be displayed in the
+          Master sheet <strong>must be entered here</strong>. The easiest way to do this
+          is to simply select every cell in the "URL" column in the  <a href='https://docs.google.com/spreadsheets/d/1d7yhUJi8sfrm19Q39mU5SUwPbw57L5WaZvd_1NO_ZW8/edit#gid=0' target='_blank'>Sheets Directory</a>
+          mentioned above and hit "Copy" (ctrl + c).
+          <br />
+          <br />
+          What you enter will look something like this:
+        </p>
+        <pre style='width: 600px; border: 1px solid gray;'>
 1St0iBz_GNHutf2eWfCQaGKK3AE6gi5JusI41MxKoTZ4
 1Flq1kb1HGR3WwnpvQx46eyRdvHivm8IIrGcxX2MmNpE
 1APetMcXOq4eo9ali-fVWmcMmM9NWJM8xoF-uHxfBYbE</pre>
-    <br />
-    (ex:  for the sheet "<em>https://docs.google.com/spreadsheets/d/1St0iBz_GNHutf2eWfCQaGKK3AE6gi5JusI41MxKoTZ4/edit#gid=1565047463</em>"
-    the URL is the part between "/d/" and "/edit", so the spreedsheet URL is "<em>1St0iBz_GNHutf2eWfCQaGKK3AE6gi5JusI41MxKoTZ4</em>".
-    </p>
-      
-    <br />
-    <textarea style='width: 600px; height: 500px;' id="urls" placeholder="Enter each spreadsheet URL on a new line">
-</textarea>
-    <br />
-    <button onclick='test()'>Help me out</button>
-    <pre id="output">
-    </pre>
+        </p>
+        <textarea style='width: 600px; height: 200px;' id="urls" placeholder="Enter each spreadsheet URL on a new line here"></textarea>
+      </li>
+    </ol>
+    <button onclick='generateSheetsFormulas()'>Help me out 😀</button>
+    <!-- output -->
+    <div id='output' style='display:none'>
+      <h2>Finally, we'll integrate the new sheet into the Master sheet</h2>
+      <ol>
+        <li>
+          <h3>Open the Master Menu Sheet</h3>
+          <p>
+            If you don't have it open yet, open the <a href='https://docs.google.com/spreadsheets/d/1PFUDs9h3twpBHZaM3cbkWDND-rJhB0P8Qvvm1-Ub-wo/edit#gid=1565047463' target='_blank'>Master sheet</a>.
+          </p>
+        </li>
+        <li>
+          <h3>Connect the Master sheet to the new sheet, using a temporary cell</h3>
+          <p>
+            You'll need to connect the Master sheet to the new spreadsheet. Do this by entering
+            this formula below into <em>any random unused cell</em> in the Master sheet, (say P2 in OTGsellers for example).
+            <br />
+            
+            <code id='new-sheet-url-in-importrange'><!-- to be replaced --></code>
+
+            <br />
+            <br />
+            Hit "enter" to save the formula into the cell, you'll then see a "REF" error, click the cell with the "REF" error
+            and you should see a buttont for "Request access". Click it. This will connect the two sheets.
+          </p>
+        </li>
+        <li>
+          <h3>Remove the temporary cell used to connect to the Master sheet</h3>
+          <p>
+            Now that the Master sheet is connected to your new sheet, you can clear/delete the cell that you just entered the
+            temporary formula above into in the previous step.
+          </p>
+        </li>
+        
+        <li>
+          <h3>Update the OTGsellers script</h3>
+          <p>
+            Set cell <strong>A3</strong> in the <strong>OTGsellers</strong> tab of the Master sheet to this function:
+          </p>
+          <code>
+            <pre id='otgsellers-function-output'></pre>
+          </code>
+        </li>
+
+        <li>
+          <h3>Update the OTGbuyers script</h3>
+          <p>
+            Set cell <strong>A3</strong> in the <strong>OTGbuyers</strong> tab of the Master sheet to this function:
+          </p>
+          <code>
+            <pre id='otgbuyers-function-output'></pre>
+          </code>
+        </li>
+        
+        <li>
+          <h3>Update the ProductionSellers script</h3>
+          <p>
+            Set cell <strong>A3</strong> in the <strong>ProductionSellers</strong> tab of the Master sheet to this function:
+          </p>
+          <code>
+            <pre id='productionsellers-function-output'></pre>
+          </code>
+        </li>
+
+        <li>
+          <h3>Update the ProductionBuyers script</h3>
+          <p>
+            Set cell <strong>A3</strong> in the <strong>ProductionBuyers</strong> tab of the Master sheet to this function:
+          </p>
+          <code>
+            <pre id='productionbuyers-function-output'></pre>
+          </code>
+        </li>
+
+        <li>
+          You should be all set! 🤓
+        </li>
+
+      </ol>
+    </div>
+    <!-- <pre id="output">
+    </pre> -->
   </body>
   
   
   <script>
-    function test() {
+    function generateSheetsFormulas() {
       // alert(JSON.stringify(document.getElementById('urls').value.split(/\r?\n/)));
       // const spreadsheetUrls = [
       //   '1St0iBz_GNHutf2eWfCQaGKK3AE6gi5JusI41MxKoTZ4',
@@ -60,8 +186,20 @@
       //   '11zv4cBUCWzLmuHI83UJJ0nKcUXfoX95KreZBYWOX40U',
       //   '1Cvi5cTbqTDMjjWXL-CLeuUaiKCUzsSmB8MMjz1JpAXE'
       // ];
+      const newSheetUrl = document.getElementById('new-sheet-url-input').value.trim()
+      if (!newSheetUrl) {
+        alert('Please enter the new sheet\s URL');
+        return;
+      }
       const spreadsheetUrls = document.getElementById('urls').value.split(/\r?\n/).map(url => url.trim())
-      let output = '';
+      if (!spreadsheetUrls || spreadsheetUrls.length < 2) {
+        alert('Please enter the list of all spreedsheet URLs');
+        return;
+      }
+      if (spreadsheetUrls.indexOf(newSheetUrl) === -1) {
+        alert('Your new spreadsheet\'s URL must also be included in the list of ALL spreadsheet URLs');
+        return;
+      }
 
       /**
       * Get the OTGsellers sheet import function
@@ -70,27 +208,43 @@
         const getRange = () => {
           let rangeStr = '{';
           spreadsheetUrls.forEach((url, i) => {
-            rangeStr += `
+    //         rangeStr += `
+    // iferror(filter(
+    //   importrange("${url}","OTGsellers!A3:K"),
+    //   NOT(ISBLANK(importrange("${url}","OTGsellers!B3:B"))),` /* ignore rows w/o date */ + `
+    //   INDEX(importrange("${url}","OTGsellers!B3:B"))>TODAY() - 8 ` /* filter to last 7 days */ + `
+    // ), 
+    // {IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,)})`;
+
+             rangeStr += `
     iferror(filter(
-      importrange("${url}","OTGsellers!A3:K"),
-      NOT(ISBLANK(importrange("${url}","OTGsellers!B3:B"))),` /* ignore rows w/o date */ + `
-      INDEX(importrange("${url}","OTGsellers!B3:B"))>TODAY() - 8 ` /* filter to last 7 days */ + `
+      importrange("${url}","OTGsellers!A3:L"),
+      NOT(ISBLANK(importrange("${url}","OTGsellers!B3:B")))` /* ignore rows w/o date */ + `
     ), 
-    {IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,)})`;
+    {IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,)})`;
+
+
             if (i < spreadsheetUrls.length - 1) {
               rangeStr += ';';
             }
+//  {IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,)})
             rangeStr += '\r\n\r\n';
 
           });
           rangeStr += '}';
           return rangeStr;
         }
+        const numberRowsInput = document.getElementById('number-of-otgsellers-rows');
+        const numberOfRowsValue = numberRowsInput.value;
+        const numberOfRows = parseInt(numberOfRowsValue);
+        if (!numberOfRowsValue || isNaN(numberOfRows)) {
+          alert('Invalid number of rows for OTG sellers, please enter a different value in the input');
+          return;
+        }
 
-        // 2 is sort by date
-        let finalStr = `
-=sort(${getRange()}, 2, false)
-        `;
+        // 2 is sort by date, limit number of rows
+        let finalStr =
+`=sortn(${getRange()}, ${numberOfRows}, 0, 2, false)`;
         return finalStr;
       };
       
@@ -118,9 +272,7 @@
         }
 
         // 5 is sort by price
-        let finalStr = `
-=sort(${getRange()}, 5, false)
-        `;
+        let finalStr = `=sort(${getRange()}, 5, false)`;
         return finalStr;
       }
 
@@ -148,9 +300,7 @@
         }
 
         // 7 means sort by price
-        let finalStr = `
-=sort(${getRange()}, 7, false)
-        `;
+        let finalStr = `=sort(${getRange()}, 7, false)`;
         return finalStr;
       };
 
@@ -178,52 +328,20 @@
         }
 
         // 2 means sort by date
-        let finalStr = `
-=sort(${getRange()}, 2, false)
-        `;
+        let finalStr = `=sort(${getRange()}, 2, false)`;
         return finalStr;
       }
 
-     output += `
-                  It's time to add a new spreadsheet!
+      const getImportTemporaryFunction = () => {
+        return `=importrange("${newSheetUrl}", "OTGsellers!A3:K")`;
+      }
 
-      === STEP 1 - Go to the Master Menu Sheet ===
-      Open it in another tab if it's not open already: https://docs.google.com/spreadsheets/d/1PFUDs9h3twpBHZaM3cbkWDND-rJhB0P8Qvvm1-Ub-wo/edit#gid=1565047463
-
-      === STEP 2 - Connect the Master sheet to the new sheet ===
-      You'll need to connect the new spreadsheet. Do this by entering
-      this formula into any random cell, then click "Request access"
-      when it fails to load. This will connect the two sheets.
-
-      =importrange("<your new spreadsheet url>", "OTGsellers!A3:K")
-
-      === STEP 3 - Remove temporary cell used for connecting ===
-      After clicking "Request access" you can now clear out that cell
-      in the master sheet so it no longer contains the =importrange(...) formula.
-
-      === STEP 4 - Update OTGsellers script ===
-      Set cell A3 in the OTGsellers tab to this function:
-
-      ${OTGsellers()}
-
-      === STEP 5 - Update OTGbuyers script ===
-      Set cell A3 in the OTGbuyers tab to this function:
-
-      ${OTGbuyers()}
-
-      === STEP 6 - Update ProductionSellers script ===
-      Set cell A3 in the ProductionSellers tab to this function:
-
-      ${ProductionSellers()}
-
-      === STEP 7 - Update ProductionBuyers script ===
-      Set cell A3 in the ProductionBuyers tab to this function:
-
-      ${ProductionBuyers()}
-
-      `;
-
-      document.getElementById('output').innerText = output;
+      document.getElementById('new-sheet-url-in-importrange').innerText = getImportTemporaryFunction();
+      document.getElementById('otgsellers-function-output').innerText = OTGsellers();
+      document.getElementById('otgbuyers-function-output').innerText = OTGbuyers();
+      document.getElementById('productionsellers-function-output').innerText = ProductionSellers();
+      document.getElementById('productionbuyers-function-output').innerText = ProductionBuyers();
+      document.getElementById('output').style.display = 'block';
     }
   </script>
 </html>
