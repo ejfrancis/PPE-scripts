@@ -19,7 +19,7 @@
         -webkit-user-select: all;  /* Chrome 49+ */
         -moz-user-select: all;     /* Firefox 43+ */
         -ms-user-select: all;      /* No support yet */
-        user-select: all;          /* Likely future */   
+        user-select: all;          /* Likely future */
       }
     </style>
   </head>
@@ -326,7 +326,7 @@
       importrange("${url}","ProductionBuyers!A3:K"),
       NOT(ISBLANK(importrange("${url}","ProductionBuyers!B3:B")))` /* ignore rows w/o date */ + `
     ),` /* if no data, return an empty row of blanks */ + `
-    {IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,)})`;
+    {IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,)})`;
             if (i < spreadsheetUrls.length - 1) {
               rangeStr += ';';
             }
