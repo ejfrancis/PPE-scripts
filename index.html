@@ -298,7 +298,7 @@
       importrange("${url}","ProductionSellers!A3:M"),
       NOT(ISBLANK(importrange("${url}","ProductionSellers!B3:B")))` /* ignore rows w/o date */ + `
     ),` /* if no data, return an empty row of blanks */ + `
-    {IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,)})`;
+    {IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,),IFERROR(0/0,)})`;
             if (i < spreadsheetUrls.length - 1) {
               rangeStr += ';';
             }
